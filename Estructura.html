@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Chat Web</title>
+    <link rel="stylesheet" href="Diseño.css">
+</head>
+<body>
+    <div id="chat-container">
+        <h2> Chat Web </h2>
+        
+        <!-- Área donde se mostrarán los mensajes -->
+        <div id="mensajes"></div>
+
+        <!-- Formulario de envío -->
+        <form id="formulario">
+            <input type="text" id="textoInput" placeholder="Escribe un mensaje..." autocomplete="off">
+            <label for="archivoInput" class="btn-adjuntar">📷/🎥</label>
+            <input type="file" id="archivoInput" accept="image/*,video/*" style="display:none;">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Cargar librería cliente de Socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>
