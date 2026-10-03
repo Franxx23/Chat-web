@@ -102,3 +102,30 @@ const PUERTO = process.env.PORT || 3000;
 server.listen(PUERTO, () => {
     console.log(`Servidor corriendo en el puerto: ${PUERTO}`);
 });
+// Verificar conexión a la BD y crear tabla si no existe
+db.getConnection((err, connection) => {
+    if (err) {
+        console.error('Error al conectar a MySQL:', err.message);
+    } else {
+        console.log('✅ Conectado a la base de datos MySQL');
+        
+        const sqlTabla = `
+            CREATE TABLE IF NOT EXISTS mensajes (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                emisor_id VARCHAR(100) NOT NULL,
+                tipo VARCHAR(20) NOT NULL,
+                contenido TEXT NOT NULL,
+                texto TEXT NULL,
+                fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `;
+        connection.query(sqlTabla, (errTabla) => {
+            if (errTabla) {
+                console.error('Error al crear la tabla:', errTabla.message);
+            } else {
+                console.log('✅ Tabla "mensajes" verificada/creada con éxito.');
+            }
+            connection.release();
+        });
+    }
+});
